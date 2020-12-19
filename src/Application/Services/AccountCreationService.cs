@@ -8,10 +8,10 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Services {
-    public class AccountCreateService : IAccountCreationService {
+    public class AccountCreationService : IAccountCreationService {
 
         private readonly IApplicationDbContext _context;
-        public AccountCreateService(IApplicationDbContext context) {
+        public AccountCreationService(IApplicationDbContext context) {
             _context = context;
         }
 

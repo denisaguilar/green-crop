@@ -12,6 +12,10 @@ namespace GreenCrop.Infrastructure.Persistence.Configuration {
         public void Configure(EntityTypeBuilder<Customer> builder) {
             builder.Property(c => c.Id)
               .ValueGeneratedOnAdd();
+            builder
+                .HasOne(a => a.Account)
+                .WithOne(c => c.Customer)
+                .HasForeignKey<Account>(a => a.CustomerId);              
         }
     }
 }

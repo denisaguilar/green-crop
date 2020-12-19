@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Services {
-    public class CustomerRetrieveService : ICustomerRetrieveService {
+    public class CustomerRetrievalService : ICustomerRetrievalService {
         private readonly IApplicationDbContext _context;
-        public CustomerRetrieveService(IApplicationDbContext context) {
+        public CustomerRetrievalService(IApplicationDbContext context) {
             _context = context;
         }
 

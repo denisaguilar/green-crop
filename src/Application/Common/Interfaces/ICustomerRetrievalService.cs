@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Common.Interfaces {
-    public interface ICustomerRetrieveService {
+    public interface ICustomerRetrievalService {
         Customer Retrieve(string id);
     }
 }
