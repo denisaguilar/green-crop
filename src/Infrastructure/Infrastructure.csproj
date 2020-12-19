@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>GreenCrop.Infrastructure</RootNamespace>
+    <AssemblyName>GreenCrop.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+</Project>
