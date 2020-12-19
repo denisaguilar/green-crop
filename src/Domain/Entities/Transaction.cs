@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace GreenCrop.Domain.Entities {
     public class Transaction {
         public string Id { get; set; }
+        public string AccountId { get; set; }
         public string Message { get; set; }
     }
 }
