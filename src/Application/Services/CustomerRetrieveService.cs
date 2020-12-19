@@ -14,7 +14,7 @@ namespace GreenCrop.Application.Services {
         }
 
         public Customer Retrieve(string id) {
-            return _context.Customers.FirstOrDefault(c => c.Id == id);
+            return _context.Customers.FirstOrDefault(c => c.Id.ToString() == id);
         }
     }
 }

@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Common.Interfaces {
     public interface IAccountCreateService {
-        Account Create(string customerId);
+        Task<Account> Create(Customer customer, CancellationToken cancellationToken);
     }
 }

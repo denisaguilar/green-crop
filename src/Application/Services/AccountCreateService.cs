@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Services {
@@ -14,13 +15,13 @@ namespace GreenCrop.Application.Services {
             _context = context;
         }
 
-        public Account Create(Customer customer) {
-            var account = new Account {                 
-                CustomerId = customer.Id                
-            }
-
-
-            return Account;
+        public async Task<Account> Create(Customer customer, CancellationToken cancellationToken) {
+            var account = new Account {
+                Customer = customer                
+            };
+            var createdAccount = _context.Accounts.Add(account).Entity;            
+            await _context.SaveChangesAsync(cancellationToken);            
+            return createdAccount;
         }
     }
 }
