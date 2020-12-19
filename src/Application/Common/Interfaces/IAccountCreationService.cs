@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Common.Interfaces {
-    public interface IAccountCreateService {
+    public interface IAccountCreationService {
         Task<Account> Create(Customer customer, CancellationToken cancellationToken);
     }
 }
