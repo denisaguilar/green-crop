@@ -3,4 +3,4 @@ solution: GreenCrop.sln
 mono: none
 dotnet: 5.0.101
 script:
-  - dotnet restore
+  - dotnet build
