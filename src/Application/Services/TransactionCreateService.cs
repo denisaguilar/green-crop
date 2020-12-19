@@ -11,7 +11,10 @@ namespace GreenCrop.Application.Services {
         }
 
         public async Task<Transaction> SetInitialBalance(Account account, double initialBalance, CancellationToken cancellationToken) {
+            account.Balance = initialBalance;
             var transaction = new Transaction {
+                Account = account,
+                Message = "Added initial balance."
             };
             var createdTransaction = _context.Transactions.Add(transaction).Entity;
             await _context.SaveChangesAsync(cancellationToken);
