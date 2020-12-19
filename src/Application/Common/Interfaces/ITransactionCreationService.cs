@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Common.Interfaces {
-    public interface ITransactionCreateService {
+    public interface ITransactionCreationService {
         Task<Transaction> SetInitialBalance(Account account, double initialBalance, CancellationToken cancellationToken);
     }
 }

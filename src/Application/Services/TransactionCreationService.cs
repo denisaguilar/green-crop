@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Services {
-    public class TransactionCreateService : ITransactionCreateService {
+    public class TransactionCreationService : ITransactionCreationService {
         private readonly IApplicationDbContext _context;
-        public TransactionCreateService(IApplicationDbContext context) {
+        public TransactionCreationService(IApplicationDbContext context) {
             _context = context;
         }
 
