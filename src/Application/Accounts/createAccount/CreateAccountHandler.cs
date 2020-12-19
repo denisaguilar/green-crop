@@ -26,16 +26,13 @@ namespace GreenCrop.Application.Accounts.CreateAccount {
             if (customer == null) {
                 throw new Exception("Customer Id not found");
             }
-
             var account = customer.Account;
             if (account == null) {
                 account = await accountCreationService.Create(customer, cancellationToken);
-            }
-
+            }            
             if (request.InitialCredit != 0) {
                 await transactionCreationService.SetInitialBalance(account, request.InitialCredit, cancellationToken);
             }
-
             return account.Id.ToString();
         }
     }

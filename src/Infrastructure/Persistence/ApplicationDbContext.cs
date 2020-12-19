@@ -1,6 +1,7 @@
 ﻿using GreenCrop.Application.Common.Interfaces;
 using GreenCrop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,8 +14,12 @@ namespace GreenCrop.Infrastructure.Persistence {
         public ApplicationDbContext(DbContextOptions options) : base(options) {
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken) {
-           return await base.SaveChangesAsync(cancellationToken);
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        protected override void OnModelCreating(ModelBuilder builder) {
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
         }
     }
 }

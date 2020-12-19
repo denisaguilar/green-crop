@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenCrop.Domain.Entities {
     public class Customer {
-        public String Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 

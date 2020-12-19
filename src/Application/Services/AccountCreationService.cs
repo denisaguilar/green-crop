@@ -19,7 +19,8 @@ namespace GreenCrop.Application.Services {
             var account = new Account {
                 Customer = customer                
             };
-            var createdAccount = _context.Accounts.Add(account).Entity;            
+            
+            var createdAccount = _context.Accounts.Add(account).Entity;
             await _context.SaveChangesAsync(cancellationToken);            
             return createdAccount;
         }

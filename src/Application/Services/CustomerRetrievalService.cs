@@ -1,5 +1,6 @@
 ﻿using GreenCrop.Application.Common.Interfaces;
 using GreenCrop.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,10 @@ namespace GreenCrop.Application.Services {
         }
 
         public Customer Retrieve(string id) {
-            return _context.Customers.FirstOrDefault(c => c.Id.ToString() == id);
+            return _context.Customers
+                .Include(c => c.Account)
+                .ThenInclude(a => a.Transactions)
+                .FirstOrDefault(c => c.Id == id);
         }
     }
 }
