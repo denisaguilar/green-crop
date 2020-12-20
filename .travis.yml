@@ -1,11 +1,9 @@
 sudo: required
 language: csharp
-solution: GreenCrop.sln
 dotnet: 5.0.101
 install:
-  - nuget restore GreenCrop.sln
-  - nuget install NUnit.Console -Version 3.11.1 -OutputDirectory testrunner
+  - dotnet restore
 script:
-  - msbuild /p:Configuration=Release GreenCrop.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.IntegrationTests/bin/Release/Application.IntegrationTests.dll
-  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.UnitTests/bin/Release/Application.UnitTests.dll
+  - dotnet build
+  - dotnet test $TRAVIS_BUILD_DIR/test/Application.IntegrationTests/Application.IntegrationTests.csproj
+  - dotnet test $TRAVIS_BUILD_DIR/test/Application.UnitTests/Application.UnitTests.csproj
