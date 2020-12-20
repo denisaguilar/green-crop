@@ -7,5 +7,5 @@ install:
   - nuget install NUnit.Console -Version 3.11.1 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release GreenCrop.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.IntegrationTests/bin/Release/net5.0/Application.IntegrationTests.dll
-  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.UnitTests/bin/Release/net5.0/Application.UnitTests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.IntegrationTests/bin/Release/Application.IntegrationTests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.11.1/tools/nunit3-console.exe ./tests/Application.UnitTests/bin/Release/Application.UnitTests.dll
