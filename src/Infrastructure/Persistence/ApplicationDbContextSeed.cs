@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GreenCrop.Infrastructure.Persistence {
     public static class ApplicationDbContextSeed {
-
+        
         public static async Task SeedData(ApplicationDbContext context) {
             context.Customers.AddRange(new HashSet<Customer> {
                 new Customer{

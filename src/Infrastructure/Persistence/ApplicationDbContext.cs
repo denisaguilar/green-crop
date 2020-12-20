@@ -11,8 +11,7 @@ namespace GreenCrop.Infrastructure.Persistence {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options) {
-        }
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) {
             return await base.SaveChangesAsync(cancellationToken);

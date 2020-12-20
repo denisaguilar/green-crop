@@ -10,7 +10,7 @@ namespace GreenCrop.Application.Services {
             _context = context;
         }
 
-        public async Task<Transaction> SetInitialBalance(Account account, double initialCredit, CancellationToken cancellationToken) {
+        public async Task<Transaction> SetInitialBalance(Account account, double initialCredit, CancellationToken cancellationToken = new CancellationToken()) {
             account.Balance = initialCredit;
             var transaction = new Transaction {
                 Account = account,

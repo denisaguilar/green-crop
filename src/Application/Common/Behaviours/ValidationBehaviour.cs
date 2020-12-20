@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GreenCrop.Application.Common.Interfaces;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace GreenCrop.Application.Common.Behaviours {
                 var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
                 var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
                 if (failures.Count != 0) {
-                    throw new ValidationException(failures);
+                    throw new Interfaces.ValidationException(failures);
                 }
             }
             return await next();

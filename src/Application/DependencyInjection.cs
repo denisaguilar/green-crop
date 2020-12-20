@@ -18,7 +18,6 @@ namespace GreenCrop.Application {
             services.AddScoped<IAccountCreationService, AccountCreationService>();
             services.AddScoped<ITransactionCreationService, TransactionCreationService>();
 
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             return services;
         }
