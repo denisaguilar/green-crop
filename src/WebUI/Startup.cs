@@ -1,3 +1,4 @@
+using GreenCrop.Application;
 using GreenCrop.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,7 @@ namespace WebUI {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddApplication();
             services.AddInfrastructure();
 
             services.AddControllersWithViews();

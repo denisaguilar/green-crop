@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GreenCrop.Domain.Entities {
-    public class Account {
-        public Guid Id { get; set; }       
+namespace GreenCrop.Domain.Entities
+{
+    public class Account
+    {
+        public Guid Id { get; set; }
         public double Balance { get; set; }
 
         public Customer Customer { get; set; }
