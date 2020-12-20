@@ -2,8 +2,8 @@
 using GreenCrop.Application.Common.Exceptions;
 using GreenCrop.Application.Services;
 using GreenCrop.Infrastructure.Persistence;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Application.UnitTests.Services {
 
@@ -12,7 +12,7 @@ namespace Application.UnitTests.Services {
 
         public AccountCreationServiceTests() { }
 
-        [Test]
+        [Fact]
         public async Task ShouldCreateAccount() {
             //given
             using var context = new ApplicationDbContext(ContextOptions);
@@ -29,7 +29,7 @@ namespace Application.UnitTests.Services {
             account.Transactions.Should().BeNullOrEmpty();
         }
 
-        [Test]
+        [Fact]
         public void ShouldThrowNotFoundExceptionWhenCustomerNotFound() {
             //given
             using var context = new ApplicationDbContext(ContextOptions);
