@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Common.Interfaces {
     public interface IAccountCreationService {
-        Task<Account> Create(Customer customer, CancellationToken cancellationToken);
+        Task<Account> Create(string customerId, CancellationToken cancellationToken);
     }
 }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GreenCrop.Domain.Entities
-{
-    public class Account
-    {
-        public Guid Id { get; set; }
+namespace GreenCrop.Domain.Entities {
+    public class Account {
+        public string Id { get; set; }
         public double Balance { get; set; }
 
-        public Customer Customer { get; set; }
         public string CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public List<Transaction> Transactions { get; set; }
     }
 }

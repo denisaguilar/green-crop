@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GreenCrop.Domain.Entities
-{
-    public class Transaction
-    {
-        public Guid Id { get; set; }
-        public Account Account { get; set; }
-        public string AccountId { get; set; }
+namespace GreenCrop.Domain.Entities {
+    public class Transaction {
+        public string Id { get; set; }
         public string Message { get; set; }
+
+        public string AccountId { get; set; }
+        public Account Account { get; set; }
     }
 }

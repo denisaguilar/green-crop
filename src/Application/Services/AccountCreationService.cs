@@ -1,5 +1,7 @@
-﻿using GreenCrop.Application.Common.Interfaces;
+﻿using GreenCrop.Application.Common.Exceptions;
+using GreenCrop.Application.Common.Interfaces;
 using GreenCrop.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Services {
-    public class AccountCreateService : IAccountCreationService {
+    public class AccountCreationService : IAccountCreationService {
 
         private readonly IApplicationDbContext _context;
-        public AccountCreateService(IApplicationDbContext context) {
+        public AccountCreationService(IApplicationDbContext context) {
             _context = context;
         }
 
-        public async Task<Account> Create(Customer customer, CancellationToken cancellationToken) {
+        public async Task<Account> Create(string customerId, CancellationToken cancellationToken) {
+            Customer customer = RetrieveCustomer(customerId);
             var account = new Account {
-                Customer = customer                
+                Customer = customer
             };
-            var createdAccount = _context.Accounts.Add(account).Entity;            
-            await _context.SaveChangesAsync(cancellationToken);            
+            var createdAccount = _context.Accounts.Add(account).Entity;
+            await _context.SaveChangesAsync(cancellationToken);
             return createdAccount;
+        }
+
+        private Customer RetrieveCustomer(string customerId) {
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == customerId);
+            if (customer == null) {
+                throw new NotFoundException(nameof(Customer), customerId);
+            }
+            return customer;
         }
     }
 }
