@@ -1,6 +1,6 @@
+sudo: required
 language: csharp
 solution: GreenCrop.sln
-mono: none
 dotnet: 5.0.101
 install:
   - nuget restore GreenCrop.sln
