@@ -15,7 +15,6 @@ namespace GreenCrop.Application {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IAccountCreationService, AccountCreationService>();
-            services.AddScoped<ICustomerRetrievalService, CustomerRetrievalService>();
             services.AddScoped<ITransactionCreationService, TransactionCreationService>();
             return services;
         }

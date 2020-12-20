@@ -1,5 +1,6 @@
 ﻿using GreenCrop.Application.Common.Interfaces;
 using GreenCrop.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,22 @@ namespace GreenCrop.Application.Services {
             _context = context;
         }
 
-        public async Task<Account> Create(Customer customer, CancellationToken cancellationToken) {
+        public async Task<Account> Create(string customerId, CancellationToken cancellationToken) {
+            Customer customer = RetrieveCustomer(customerId);
             var account = new Account {
-                Customer = customer                
+                Customer = customer
             };
-            
             var createdAccount = _context.Accounts.Add(account).Entity;
-            await _context.SaveChangesAsync(cancellationToken);            
+            await _context.SaveChangesAsync(cancellationToken);
             return createdAccount;
+        }
+
+        private Customer RetrieveCustomer(string customerId) {
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == customerId);
+            if (customer == null) {
+                throw new Exception("Customer Id not found");
+            }
+            return customer;
         }
     }
 }
