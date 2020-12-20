@@ -7,10 +7,10 @@ namespace GreenCrop.Application.Accounts.CreateAccount {
 
         public CreateAccountCommandValidator() {
             RuleFor(c => c.CustomerID)
-                .NotEmpty().WithMessage("CustomerId is required")
-                .Matches(GuidRegexPattern).WithMessage("CustomerId invalid format");
+                .NotEmpty().WithMessage("field is required")
+                .Matches(GuidRegexPattern).WithMessage("invalid format");
             RuleFor(c => c.InitialCredit)
-                .GreaterThanOrEqualTo(0).WithMessage("Balance should not be negative");
+                .GreaterThanOrEqualTo(0).WithMessage("the value should not be negative");
         }
     }
 }

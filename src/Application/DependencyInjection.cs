@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using GreenCrop.Application.Common.Behaviours;
 using GreenCrop.Application.Common.Interfaces;
 using GreenCrop.Application.Services;
 using MediatR;
@@ -16,6 +17,9 @@ namespace GreenCrop.Application {
 
             services.AddScoped<IAccountCreationService, AccountCreationService>();
             services.AddScoped<ITransactionCreationService, TransactionCreationService>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             return services;
         }
     }
