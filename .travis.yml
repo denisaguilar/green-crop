@@ -4,6 +4,5 @@ dotnet: 5.0.101
 install:
   - dotnet restore
 script:
-  - dotnet build
-  - dotnet test $TRAVIS_BUILD_DIR/test/Application.IntegrationTests/Application.IntegrationTests.csproj
-  - dotnet test $TRAVIS_BUILD_DIR/test/Application.UnitTests/Application.UnitTests.csproj
+  - dotnet test $TRAVIS_BUILD_DIR/tests/Application.IntegrationTests/Application.IntegrationTests.csproj
+  - dotnet test $TRAVIS_BUILD_DIR/tests/Application.UnitTests/Application.UnitTests.csproj
