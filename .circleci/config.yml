@@ -21,6 +21,9 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "tests/Application.IntegrationTests/Application.IntegrationTests.csproj" }}
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "tests/Application.UnitTests/Application.UnitTests.csproj" }}
       - run:
           name: "Run Application Tests"
