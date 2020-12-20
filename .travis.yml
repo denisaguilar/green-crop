@@ -1,6 +1,10 @@
+sudo: required
 language: csharp
-solution: GreenCrop.sln
+dist: trusty
 mono: none
 dotnet: 5.0.101
-script:
+install:
   - dotnet restore
+script:
+  - dotnet test $TRAVIS_BUILD_DIR/tests/Application.IntegrationTests/Application.IntegrationTests.csproj
+  - dotnet test $TRAVIS_BUILD_DIR/tests/Application.UnitTests/Application.UnitTests.csproj
