@@ -1,0 +1,17 @@
+<h2>Customers</h2>
+<table id="customers">
+  <tr>
+    <th>Name</th>
+    <th>Id</th>
+  </tr>
+  <tr *ngFor="let customer of customers">
+    <td>
+      <a routerLink="/customer-detail/{{customer.id}}">
+        {{customer.name}} {{customer.surname}}
+      </a>
+    </td>
+    <td>
+      {{customer.id}}
+    </td>
+  </tr>
+</table>

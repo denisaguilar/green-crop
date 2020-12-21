@@ -1,0 +1,7 @@
+<div *ngIf="notifier.messages.length">
+
+  <h2>Logs</h2>
+  <button class="clear" (click)="notifier.clear()">clear</button>
+  <div *ngFor='let message of notifier.messages'> {{message}} </div>
+
+</div>

@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace GreenCrop.Application.IntegrationTests.Accounts {
-    public class CreateAccountHandlerTests : IClassFixture<TestHelper> {
-        private readonly TestHelper testHelper;
-
-        public CreateAccountHandlerTests(TestHelper helper) {
-            testHelper = helper;
+    public class CreateAccountHandlerTests : TestBase {
+        private TestHelper helper;
+        public CreateAccountHandlerTests() {
+            helper = new TestHelper(ScopeFactory);
         }
 
         [Fact]
@@ -23,10 +22,10 @@ namespace GreenCrop.Application.IntegrationTests.Accounts {
             };
 
             //when
-            var accountId = await testHelper.SendAsync(command);
+            var response = await helper.SendAsync(command);
 
             //then
-            var account = await testHelper.FindAccountAsync(accountId);
+            var account = await helper.FindAccountAsync(response.Id);
             account.CustomerId.Should().Be(command.CustomerID);
             account.Balance.Should().Be(command.InitialCredit);
             account.Transactions.Should().HaveCount(1);
@@ -36,15 +35,15 @@ namespace GreenCrop.Application.IntegrationTests.Accounts {
         public async Task ShoultCreateAccountWithoutTransaction() {
             //given
             var command = new CreateAccountCommand {
-                CustomerID = "74ff61a7-dcbd-4438-9775-7e1a5ad26261",
+                CustomerID = "5af4eb21-8900-451d-a887-5af0be5615c5",
                 InitialCredit = 0
             };
 
             //when
-            var accountId = await testHelper.SendAsync(command);
+            var response = await helper.SendAsync(command);
 
             //then
-            var account = await testHelper.FindAccountAsync(accountId);
+            var account = await helper.FindAccountAsync(response.Id);
             account.CustomerId.Should().Be(command.CustomerID);
             account.Balance.Should().Be(command.InitialCredit);
             account.Transactions.Should().HaveCount(0);
@@ -59,7 +58,7 @@ namespace GreenCrop.Application.IntegrationTests.Accounts {
             };
 
             //then
-            FluentActions.Invoking(() => testHelper.SendAsync(command))
+            FluentActions.Invoking(() => helper.SendAsync(command))
                 .Should().Throw<NotFoundException>();
         }
 
@@ -75,7 +74,7 @@ namespace GreenCrop.Application.IntegrationTests.Accounts {
             };
 
             //then
-            FluentActions.Invoking(() => testHelper.SendAsync(command))
+            FluentActions.Invoking(() => helper.SendAsync(command))
                 .Should().Throw<ValidationException>();
         }
     }

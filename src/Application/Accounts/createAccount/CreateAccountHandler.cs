@@ -1,4 +1,5 @@
 using GreenCrop.Application.Common.Interfaces;
+using GreenCrop.Application.Common.Models;
 using GreenCrop.Domain.Entities;
 using MediatR;
 using System;
@@ -7,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Accounts.CreateAccount {
-    public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, string> {
+    public class CreateAccountHandler : IRequestHandler<CreateAccountCommand, AccountCreationResponse> {
         private readonly IAccountCreationService accountCreationService;
         private readonly ITransactionCreationService transactionCreationService;
 
@@ -18,12 +19,12 @@ namespace GreenCrop.Application.Accounts.CreateAccount {
             transactionCreationService = transactionCreation;
         }
 
-        public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken) {
+        public async Task<AccountCreationResponse> Handle(CreateAccountCommand request, CancellationToken cancellationToken) {
             var account = await accountCreationService.Create(request.CustomerID, cancellationToken);
             if (request.InitialCredit != 0) {
                 await transactionCreationService.SetInitialBalance(account, request.InitialCredit, cancellationToken);
             }
-            return account.Id;
+            return new AccountCreationResponse { Id = account.Id};
         }
     }
 }

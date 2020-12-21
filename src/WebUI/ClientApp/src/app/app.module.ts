@@ -6,26 +6,29 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { AccountComponent } from './account/account.component';
+import { CustomersComponent } from './customers/customers.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { NotifierService } from './services/notifier.service';
+import { NotifierComponent } from './notifier/notifier.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    NotifierComponent,
+    AccountComponent,
+    CustomersComponent,
+    CustomerDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: CustomersComponent, pathMatch: 'full' },
+      { path: 'accounts', component: AccountComponent },
+      { path: 'customer-detail/:id', component: CustomerDetailsComponent },
     ])
   ],
   providers: [],
