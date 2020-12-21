@@ -1,0 +1,12 @@
+<p>account works!</p>
+<div>
+  <label>CustomerId:
+    <input #customerId />
+  </label>
+  <label>InitialCredit:
+    <input #initialCredit />
+  </label>
+  <button (click)="create(customerId.value, initialCredit.value);">
+    create account
+  </button>
+</div>
