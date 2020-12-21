@@ -7,7 +7,7 @@ namespace GreenCrop.Infrastructure.Persistence.Configuration {
         public void Configure(EntityTypeBuilder<Transaction> builder) {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Id)
-              .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd();
         }
     }
 }
