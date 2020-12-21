@@ -11,7 +11,7 @@ namespace GreenCrop.WebUI.Controllers {
     public class CustomerController : ApiControllerBase {
         [HttpGet("{customerId}")]
         public async Task<ActionResult<CustomerDetails>> Retrieve(string customerId) {
-            var query = new RetrieveCustomerQuery {
+            var query = new RetrieveCustomerCommand {
                 CustomerId = customerId
             };
             return await Mediator.Send(query);

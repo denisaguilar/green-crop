@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace GreenCrop.Application.Customers.retrieveCustomer {
-    public class RetrieveCustomerHandler : IRequestHandler<RetrieveCustomerQuery, CustomerDetails> {
+    public class RetrieveCustomerHandler : IRequestHandler<RetrieveCustomerCommand, CustomerDetails> {
 
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -24,19 +24,21 @@ namespace GreenCrop.Application.Customers.retrieveCustomer {
             _mapper = mapper;
         }
 
-        public async Task<CustomerDetails> Handle(RetrieveCustomerQuery request, CancellationToken cancellationToken) {
+        public async Task<CustomerDetails> Handle(RetrieveCustomerCommand request, CancellationToken cancellationToken) {
+            CustomerDetails customerDetails = await RetrieveCustomer(request, cancellationToken);
+            if (customerDetails == null) {
+                throw new NotFoundException(nameof(Customer), request.CustomerId);
+            }
+            return customerDetails;
+        }
 
-            var customer = await _context.Customers
+        private async Task<CustomerDetails> RetrieveCustomer(RetrieveCustomerCommand request, CancellationToken cancellationToken) {
+            return await _context.Customers
                 .Include(c => c.Accounts)
                 .ThenInclude(a => a.Transactions)
                 .Where(c => c.Id == request.CustomerId)
-                .FirstOrDefaultAsync();
-
-            if (customer == null) {
-                throw new NotFoundException(nameof(Customer), request.CustomerId);
-            }
-
-            return _mapper.Map<CustomerDetails>(customer);
+                .ProjectTo<CustomerDetails>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(cancellationToken);
         }
     }
 }
