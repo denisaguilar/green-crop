@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { CustomersComponent } from './customers/customers.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     NavMenuComponent,
     HomeComponent,
     AccountComponent,
-    FetchDataComponent
+    CustomersComponent,
+    CustomerDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -24,8 +26,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'account', component: AccountComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'accounts', component: AccountComponent },
+      { path: 'customers', component: CustomersComponent },
+      { path: 'customer-detail/:id', component: CustomerDetailsComponent },
     ])
   ],
   providers: [],

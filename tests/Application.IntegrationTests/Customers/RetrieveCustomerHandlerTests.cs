@@ -5,13 +5,12 @@ using GreenCrop.Application.Customers.retrieveCustomer;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Application.IntegrationTests.Customer {
-    public class RetrieveCustomerHandlerTests : IClassFixture<TestHelper> {
-        private readonly TestHelper testHelper;
-
-        public RetrieveCustomerHandlerTests(TestHelper helper) {
-            testHelper = helper;
-        }
+namespace Application.IntegrationTests.Customers {
+    public class RetrieveCustomerHandlerTests : TestBase {
+        private TestHelper helper;
+        public RetrieveCustomerHandlerTests() {
+            helper = new TestHelper(ScopeFactory);
+        }   
 
         [Fact]
         public async Task ShouldRetrieveCustomer() {
@@ -21,7 +20,7 @@ namespace Application.IntegrationTests.Customer {
             };
 
             //when
-            var customerDetails = await testHelper.SendAsync(command);
+            var customerDetails = await helper.SendAsync(command);
 
             //then
             customerDetails.Id.Should().Be(command.CustomerId);
@@ -37,7 +36,7 @@ namespace Application.IntegrationTests.Customer {
             };
 
             //then
-            FluentActions.Invoking(() => testHelper.SendAsync(command))
+            FluentActions.Invoking(() => helper.SendAsync(command))
                 .Should().Throw<NotFoundException>();
         }
 
@@ -49,7 +48,7 @@ namespace Application.IntegrationTests.Customer {
             };
 
             //then
-            FluentActions.Invoking(() => testHelper.SendAsync(command))
+            FluentActions.Invoking(() => helper.SendAsync(command))
                 .Should().Throw<ValidationException>();
         }
     }

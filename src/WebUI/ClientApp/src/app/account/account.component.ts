@@ -19,8 +19,6 @@ export class AccountComponent implements OnInit {
       initialCredit: initialCredit
     }
     this.accountService.createAccount(command)
-      .subscribe(accountId => {
-        console.log("Account created: " + accountId)
-      })
+      .subscribe();
   }
 }

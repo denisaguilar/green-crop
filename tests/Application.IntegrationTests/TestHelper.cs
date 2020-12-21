@@ -10,26 +10,11 @@ using System.Threading.Tasks;
 using WebUI;
 
 namespace Application.IntegrationTests {
-    public class TestHelper : IDisposable {
-        private static IServiceScopeFactory _scopeFactory;
-        private static IConfigurationRoot _configuration;
+    public class TestHelper{
+        private static IServiceScopeFactory _scopeFactory;        
 
-        public TestHelper() {
-            _configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .AddEnvironmentVariables()
-                .Build();
-
-            var services = new ServiceCollection();
-
-            var startup = new Startup(_configuration);
-            startup.ConfigureServices(services);
-
-            var rootContainer = services.BuildServiceProvider();
-            _scopeFactory = rootContainer.GetService<IServiceScopeFactory>();
-
-            SeedData();
+        public TestHelper(IServiceScopeFactory scopeFactory) {
+            _scopeFactory = scopeFactory;
         }
 
         public async void SeedData() {
@@ -50,13 +35,19 @@ namespace Application.IntegrationTests {
             return await context.Accounts.Include(a => a.Transactions).FirstOrDefaultAsync(a => a.Id == id);
         }
 
+        public static async Task<Customer> FindCustomerAsync(string id) {
+            using var scope = _scopeFactory.CreateScope();
+            var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+            return await context.Customers
+                .Include(c => c.Accounts)
+                .ThenInclude(a => a.Transactions)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+
         public async Task<int> CountAsync<TEntity>() where TEntity : class {
             using var scope = _scopeFactory.CreateScope();
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
             return await context.Set<TEntity>().CountAsync();
-        }
-
-        public void Dispose() {            
         }
     }
 }

@@ -1,0 +1,23 @@
+<h2>Customers</h2>
+<table class="pure-table pure-table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Id</th>
+    <th>Options</th>
+  </tr>
+  <tr *ngFor="let customer of customers">
+    <td>
+      {{customer.name}} {{customer.surname}}
+    </td>
+    <td>
+      <a routerLink="/customer-detail/{{customer.id}}">
+        <span class="badge">{{customer.id}}</span>
+      </a>
+    </td>
+    <td>
+      <a routerLink="/account/{{customer.id}}">
+        Create ACC
+      </a>
+    </td>
+  </tr>
+</table>
