@@ -8,7 +8,7 @@ using Xunit;
 
 namespace GreenCrop.Application.IntegrationTests.Accounts {
     public class CreateAccountHandlerTests : IClassFixture<TestHelper> {
-        private TestHelper testHelper;
+        private readonly TestHelper testHelper;
 
         public CreateAccountHandlerTests(TestHelper helper) {
             testHelper = helper;

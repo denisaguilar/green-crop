@@ -18,7 +18,7 @@ namespace GreenCrop.Application.Services {
         }
 
         public async Task<Account> Create(string customerId, CancellationToken cancellationToken = new CancellationToken()) {
-            Customer customer = RetrieveCustomer(customerId);
+            var customer = RetrieveCustomer(customerId);
             var account = new Account {
                 Customer = customer
             };
