@@ -6,16 +6,17 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { NotifierService } from './services/notifier.service';
+import { NotifierComponent } from './notifier/notifier.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
+    NotifierComponent,
     AccountComponent,
     CustomersComponent,
     CustomerDetailsComponent,
@@ -25,9 +26,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: CustomersComponent, pathMatch: 'full' },
       { path: 'accounts', component: AccountComponent },
-      { path: 'customers', component: CustomersComponent },
       { path: 'customer-detail/:id', component: CustomerDetailsComponent },
     ])
   ],

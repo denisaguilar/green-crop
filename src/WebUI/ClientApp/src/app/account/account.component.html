@@ -1,12 +1,15 @@
-<p>account works!</p>
 <div>
-  <label>CustomerId:
-    <input #customerId />
+  <div>
+    Customer:
+    <select name="customer" [(ngModel)]="selectedCustomerId">
+      <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}} {{customer.surname}}</option>
+    </select>
+  </div>
+  <br>
+  <label>Initial Credit:
+    <input #initialCredit value="0" />
   </label>
-  <label>InitialCredit:
-    <input #initialCredit />
-  </label>
-  <button (click)="create(customerId.value, initialCredit.value);">
-    create account
-  </button>
 </div>
+<button (click)="create(initialCredit.value);">
+  Create account
+</button>

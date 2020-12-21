@@ -1,17 +1,19 @@
 <div *ngIf="customer">
   <h2>{{customer.name}} {{customer.surname}}</h2>
-  {{customer.id}}
+  <br>
+  <br>
   <div>
     <div *ngFor="let account of customer.accounts">
-      <h4>Account</h4>
-      {{account.id}}
-      <div></div>
-      <div>Balance: {{account.balance}} $</div>
-      <h6>Transactions</h6>
-      <div *ngFor="let transaction of account.transactions">
-        {{transaction.id}}
-        <div>Message: {{transaction.message}} </div>
-        <div>CreateAt: {{transaction.created | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+      <h3>Account: {{account.id}}</h3>
+      <p><strong>Balance: </strong>{{account.balance}}</p>
+      <div *ngIf="account.transactions.length > 0">
+        <h4>Transactions</h4>
+        <div *ngFor="let transaction of account.transactions">
+          {{transaction.id}}
+          <div><strong>Message:</strong> {{transaction.message}} </div>
+          <div><strong>Date:</strong> {{transaction.created | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+        </div>
+        <br>
       </div>
     </div>
   </div>

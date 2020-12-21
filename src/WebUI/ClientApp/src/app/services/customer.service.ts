@@ -3,6 +3,7 @@ import { Inject, Injectable, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Customer } from '../models/customer';
+import { NotifierService } from './notifier.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ export class CustomerService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, private notifier: NotifierService, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
   getCustomers(): Observable<Customer[]> {
     const url = this.baseUrl + this.customerUrl;
     return this.http.get<Customer[]>(url).pipe(
-      tap(_ => this.notify('fetched customers')),
+      tap(_ => this.notifier.add('fetched customers')),
       catchError(this.handleError<Customer[]>('getCustomers', []))
     );
   }
@@ -30,7 +31,7 @@ export class CustomerService {
   getCustomer(id: string): Observable<Customer> {
     const url = this.baseUrl + this.customerUrl + "/" + id;
     return this.http.get<Customer>(url).pipe(
-      tap((resp: Customer) => this.notify(`fetched consumer with id ${JSON.stringify(resp)}`)),
+      tap((resp: Customer) => this.notifier.add(`fetched customer with id ${resp.id}`)),
       catchError(this.handleError<Customer>(`getCustomer id = ${id}`))
     );
   }
@@ -38,12 +39,8 @@ export class CustomerService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      this.notify(`${operation} failed: ${error.message}`);
+      this.notifier.add(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
-  }
-
-  private notify(message: string) {
-    console.log(message);
   }
 }
